@@ -36,3 +36,8 @@ spring:
           uri: http://localhost:8086
           predicates:
             - Path=/api/v1/notifications/**
+          filters:
+            - name: JwtAuthFilter
+            - name: RateLimiter
+              args:
+                rateLimit: 50
