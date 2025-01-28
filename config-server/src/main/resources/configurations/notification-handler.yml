@@ -1,0 +1,58 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultzone: http://localhost:8761/eureka
+server:
+  port: 8082
+spring:
+  cache:
+    type: redis
+    redis:
+      host: localhost
+      port: 6379
+
+  application:
+    name: NOTIFICATION-HANDLER
+  #  datasource:
+  #    driver-class-name: org.postgresql.Driver
+  #    url: jdbc:postgresql://localhost:5432/notification
+  #    username: username
+  #    password: password
+  #  jpa:
+  #    hibernate:
+  #      ddl-auto: update
+  #    database: postgresql
+  #    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    topic:
+      sms-topic: sms_event_topic
+      email-topic: email_event_topic
+      ios-topic: sms_event_topic
+      android-topic: email_event_topic
+    consumer:
+      bootstrap-servers: 'localhost:9092'
+      group-id: notification
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      #      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          deserializer:
+            value:
+              delegate:
+                class: org.springframework.kafka.support.serializer.JsonDeserializer
+          json:
+            trusted:
+              packages: '*'
+    producer:
+      bootstrap-servers: 'localhost:9092'
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+application:
+  config:
+    cart-url: http://localhost:8083/api/v1/carts
+    product-url: http://localhost:8081/api/v1/products
+    user-url: http://localhost:8082/api/v1/users

@@ -1,0 +1,30 @@
+package com.notification.notificationservice.dto.event;
+
+import com.notification.notificationservice.dto.DeliveryType;
+import com.notification.notificationservice.dto.MessageType;
+import com.notification.notificationservice.dto.Recipient;
+import com.notification.notificationservice.dto.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class EmailEvent {
+    private String userId;
+    private String notificationId;
+    private String type;
+    private Status status;
+    private MessageType messageType;
+    private DeliveryType deliveryType;
+    private String subject;
+    private String messageBody;
+    private String sender;
+    private List<Recipient> recipients;
+    private String property;
+}
