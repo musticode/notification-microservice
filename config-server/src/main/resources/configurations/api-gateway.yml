@@ -12,30 +12,22 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: PRODUCT-CATALOG
+        - id: NOTIFICATION-HANDLER
           uri: http://localhost:8081
           predicates:
-            - Path=/api/v1/products/**
-        - id: USER-MANAGEMENT
+            - Path=/api/v1/notification-handler/**
+        - id: USER-SERVICE
           uri: http://localhost:8082
           predicates:
             - Path=/api/v1/users/**
-        - id: SHOPPING-CART
+        - id: NOTIFICATION-SERVICE
           uri: http://localhost:8083
           predicates:
             - Path=/api/v1/carts/**
-        - id: ORDER-MANAGEMENT
+        - id: SEARCH-SERVICE
           uri: http://localhost:8084
           predicates:
             - Path=/api/v1/orders/**
-        - id: PAYMENT-SERVICE
-          uri: http://localhost:8085
-          predicates:
-            - Path=/api/v1/payments/**
-        - id: NOTIFICATION-SERVICE
-          uri: http://localhost:8086
-          predicates:
-            - Path=/api/v1/notifications/**
           filters:
             - name: JwtAuthFilter
             - name: RateLimiter
